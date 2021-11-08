@@ -1,0 +1,59 @@
+# k8s-version: 1.20
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi-controller-app
+  namespace: unifi-controller
+spec:
+  selector:
+    matchLabels:
+      run: unifi-controller-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: unifi-controller-app
+#    volumes:
+#      - name: unifi-controller-storage
+#        persistentVolumeClaim:
+#          claimName: pvc-unifi-controller
+    spec:
+      containers:
+        - name: unifi-controller-app
+          image: lscr.io/linuxserver/unifi-controller:6.4.54
+#        - volumeMounts:
+#            mountPath: "/config"
+#            name: unifi-controller-storage
+          ports:
+          - containerPort: 8443
+            name: admin-portal
+            protocol: TCP
+          - containerPort: 8080
+            name: dev-comm
+            protocol: TCP
+          - containerPort: 8843
+            name: g-portal-https
+            protocol: TCP
+          - containerPort: 8880
+            name: g-portal-http
+            protocol: TCP
+          - containerPort: 6789
+            name: mobile-test
+            protocol: TCP
+          - containerPort: 3478
+            name: unifi-stun-port
+            protocol: UDP
+          - containerPort: 10001
+            name: ap-discovery
+            protocol: UDP
+          - containerPort: 1900
+            name: disc-l2-network
+            protocol: UDP
+          - containerPort: 5514
+            name: remote-syslog
+            protocol: UDP
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              memory: 1Gi

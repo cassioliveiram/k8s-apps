@@ -1,0 +1,6 @@
+# k8s-version: 1.20
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: unifi-controller
+
