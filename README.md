@@ -1,5 +1,5 @@
 # k8s-apps
-Personal applications in my k8s Cluster
+Personal applications in my raspberry k3s Cluster
 
 ## ArgoCD
 
