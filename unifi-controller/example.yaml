@@ -37,8 +37,15 @@ spec:
             - name: unifi-ctrl
               mountPath: /unifi
               subPath: unifi
-          resources:
-            limits:
-              memory: 750M
-            requests:
-              memory: 500M
+  volumeClaimTemplates:
+    - metadata:
+        name: unifi-ctrl
+      spec:
+        storageClassName: "local-path"
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          limits:
+            memory: 750M
+          requests:
+            memory: 500M
+            storage: 3Gi
