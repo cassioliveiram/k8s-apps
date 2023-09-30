@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: rasp-istio-vs
+  namespace: echoserver-ns
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - rasp-istio-gateway
+  http:
+    - match:
+        - uri:
+            exact: /echo
+      route:
+        - destination:
+            host: echoserver-service.echoserver-ns.svc.cluster.local
+            port:
+              number: 80
