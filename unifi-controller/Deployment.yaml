@@ -1,0 +1,44 @@
+## Reference: https://hub.docker.com/r/jacobalberty/unifi
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: unifi-ctrl
+  namespace: unifi-controller
+spec:
+  serviceName: "unifi"
+  replicas: 1
+  selector:
+    matchLabels:
+      name: unifi-ctrl
+  template:
+    metadata:
+      name: unifi-ctrl
+      labels:
+        name: unifi-ctrl
+    spec:
+      containers:
+        - name: unifi-ctrl
+          image: 'docker.io/jacobalberty/unifi:v7.5'
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3478
+              protocol: UDP
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8843
+              protocol: TCP
+            - containerPort: 8880
+              protocol: TCP
+            - containerPort: 6789
+              protocol: TCP
+          volumeMounts:
+            - name: unifi-ctrl
+              mountPath: /unifi
+              subPath: unifi
+          resources:
+            limits:
+              memory: 750M
+            requests:
+              memory: 500M

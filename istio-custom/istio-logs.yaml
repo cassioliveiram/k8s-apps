@@ -1,0 +1,10 @@
+# for reference: https://istio.io/latest/docs/reference/config/telemetry/#Telemetry
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: telemetry-rasp-cluster
+  namespace: istio-system
+spec:
+  accessLogging:
+    - providers:
+        - name: envoy

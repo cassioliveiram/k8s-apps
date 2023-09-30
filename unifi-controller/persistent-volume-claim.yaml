@@ -1,14 +1,12 @@
-## k8s-version: 1.20
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  name: pvc-unifi-controller
-#  namespace: unifi-controller
-#spec:
-#  storageClassName: ""
-#  accessModes:
-#    - ReadWriteOnce
-#  resources:
-#    requests:
-#      storage: 8Gi
-##  volumeName: pv-unifi-controller
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: unifi-ctrl
+  namespace: unifi-controller
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 3Gi
