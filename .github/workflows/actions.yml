@@ -45,6 +45,9 @@ jobs:
           git_tags=$(git tag --sort=version:refname)
           git_latest_tag=$(echo "$git_tags" | tail -n 1)
           
+          echo "$git_tags"
+          echo "$git_latest_tag"
+          
           if [ -z "$git_latest_tag" ]; then
             git_latest_tag="v0.0.0"
           fi
