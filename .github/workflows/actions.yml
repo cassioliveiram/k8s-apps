@@ -50,6 +50,9 @@ jobs:
           fi
 
           git_latest_tag=$(echo "$git_latest_tag" | sed 's/^v//')
+          
+          echo "GIT LIST TAGS"
+          echo "$git_latest_tag"
 
           echo '-------------------------------------'
           echo 'Setting patch model and next version'
@@ -71,6 +74,10 @@ jobs:
             exit 1
           
           fi
+          
+          echo "GIT PATCH TYPE"
+          echo "$version_type"
+          echo "$version_next"
 
           echo '-------------------------------------'
           echo 'Publishing tag in this repo'
