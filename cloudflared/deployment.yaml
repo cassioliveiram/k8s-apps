@@ -23,7 +23,16 @@ spec:
           - run
         volumeMounts:
           - name: cloudflared-creds
-            mountPath: /etc/cloudflared
+            mountPath: /etc/cloudflared/creds.json
+            subPath: creds.json
+            readOnly: true
+          - name: cloudflared-creds
+            mountPath: /etc/cloudflared/config.yaml
+            subPath: config.yaml
+            readOnly: true
+          - name: cloudflared-creds
+            mountPath: /etc/cloudflared/cert.pem
+            subPath: cert.pem
             readOnly: true
       volumes:
         - name: cloudflared-creds
