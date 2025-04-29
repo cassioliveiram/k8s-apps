@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: k8s-apps
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: echoserver-ns
+      server: https://kubernetes.default.svc
+    - namespace: unifi-controller
+      server: https://kubernetes.default.svc
+    - namespace: cloudflared
+      server: https://kubernetes.default.svc
+    - namespace: network-debugger
+      server: https://kubernetes.default.svc
+  sourceRepos:
+    - https://github.com/cassioliveiram/k8s-apps.git

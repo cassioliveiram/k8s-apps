@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: network-debugger-arm
+  namespace: network-debugger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: network-debugger-arm
+  template:
+    metadata:
+      labels:
+        app: network-debugger-arm
+    spec:
+      containers:
+      - name: network-debugger
+        image: arm64v8/debian:bullseye-slim
+        command: ["bash", "-c", "apt-get update && apt-get install -y curl telnet && tail -f /dev/null"]
+      tolerations:
+        - key: "spot"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: NotIn
+                    values:
+                      - amd64
