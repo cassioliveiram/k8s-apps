@@ -27,6 +27,13 @@ spec:
           effect: "NoSchedule"
       affinity:
         nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: NotIn
+                    values:
+                      - amd64
           preferredDuringSchedulingIgnoredDuringExecution:
             - weight: 1
               preference:
