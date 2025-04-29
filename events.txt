@@ -1,0 +1,25 @@
+LAST SEEN   TYPE      REASON              OBJECT                                  MESSAGE
+3m27s       Normal    Scheduled           pod/echoserver-54bfcfff8d-2d88d         Successfully assigned echoserver-ns/echoserver-54bfcfff8d-2d88d to rasp-srv-2
+3m27s       Normal    Scheduled           pod/echoserver-54bfcfff8d-dzksv         Successfully assigned echoserver-ns/echoserver-54bfcfff8d-dzksv to srv-1
+3m27s       Normal    Scheduled           pod/echoserver-54bfcfff8d-4pgvs         Successfully assigned echoserver-ns/echoserver-54bfcfff8d-4pgvs to rasp-srv-3
+7m1s        Normal    Killing             pod/debug-echoserver-7d6c5c4bd6-9zmt5   Stopping container echoserver
+3m27s       Normal    ScalingReplicaSet   deployment/echoserver                   Scaled up replica set echoserver-54bfcfff8d to 3
+3m27s       Normal    SuccessfulCreate    replicaset/echoserver-54bfcfff8d        Created pod: echoserver-54bfcfff8d-dzksv
+3m27s       Normal    Pulling             pod/echoserver-54bfcfff8d-dzksv         Pulling image "k8s.gcr.io/echoserver:1.10"
+3m27s       Normal    SuccessfulCreate    replicaset/echoserver-54bfcfff8d        Created pod: echoserver-54bfcfff8d-4pgvs
+3m27s       Normal    Pulling             pod/echoserver-54bfcfff8d-4pgvs         Pulling image "k8s.gcr.io/echoserver:1.10"
+3m27s       Normal    SuccessfulCreate    replicaset/echoserver-54bfcfff8d        Created pod: echoserver-54bfcfff8d-2d88d
+3m27s       Normal    Pulling             pod/echoserver-54bfcfff8d-2d88d         Pulling image "k8s.gcr.io/echoserver:1.10"
+3m23s       Normal    Created             pod/echoserver-54bfcfff8d-dzksv         Created container echoserver
+3m23s       Normal    Pulled              pod/echoserver-54bfcfff8d-dzksv         Successfully pulled image "k8s.gcr.io/echoserver:1.10" in 4.26s (4.26s including waiting). Image size: 46240258 bytes.
+3m22s       Normal    Started             pod/echoserver-54bfcfff8d-dzksv         Started container echoserver
+3m6s        Normal    Pulled              pod/echoserver-54bfcfff8d-2d88d         Successfully pulled image "k8s.gcr.io/echoserver:1.10" in 21.105s (21.105s including waiting). Image size: 46240258 bytes.
+3m6s        Normal    Pulled              pod/echoserver-54bfcfff8d-4pgvs         Successfully pulled image "k8s.gcr.io/echoserver:1.10" in 20.997s (20.997s including waiting). Image size: 46240258 bytes.
+97s         Normal    Pulled              pod/echoserver-54bfcfff8d-2d88d         Container image "k8s.gcr.io/echoserver:1.10" already present on machine
+97s         Normal    Started             pod/echoserver-54bfcfff8d-2d88d         Started container echoserver
+97s         Normal    Created             pod/echoserver-54bfcfff8d-2d88d         Created container echoserver
+87s         Warning   BackOff             pod/echoserver-54bfcfff8d-4pgvs         Back-off restarting failed container echoserver in pod echoserver-54bfcfff8d-4pgvs_echoserver-ns(41e0def8-09b6-4a99-9c59-93653e876507)
+87s         Normal    Pulled              pod/echoserver-54bfcfff8d-4pgvs         Container image "k8s.gcr.io/echoserver:1.10" already present on machine
+87s         Normal    Started             pod/echoserver-54bfcfff8d-4pgvs         Started container echoserver
+87s         Normal    Created             pod/echoserver-54bfcfff8d-4pgvs         Created container echoserver
+69s         Warning   BackOff             pod/echoserver-54bfcfff8d-2d88d         Back-off restarting failed container echoserver in pod echoserver-54bfcfff8d-2d88d_echoserver-ns(cec80f40-a4cc-4958-b099-7f2b3a94dd1e)

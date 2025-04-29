@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: echoserver
-          image: k8s.gcr.io/echoserver:1.10
+          image: gcr.io/google-containers/echoserver-arm:1.10
           ports:
             - containerPort: 8080
       tolerations:
