@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: echoserver
-          image: cruse/echoserver-arm:1.8
+          image: gcr.io/google_containers/echoserver:1.10
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -44,7 +44,7 @@ spec:
             nodeSelectorTerms:
               - matchExpressions:
                   - key: kubernetes.io/arch
-                    operator: NotIn
+                    operator: In
                     values:
                       - amd64
           preferredDuringSchedulingIgnoredDuringExecution:
