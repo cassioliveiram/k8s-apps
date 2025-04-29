@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,16 +17,15 @@ spec:
       - name: cloudflared
         image: cloudflare/cloudflared:latest
         args:
-        - tunnel
-        - --no-autoupdate
-        - run
-        - --token
-        - <outra forma de auth, se usar token>
+          - tunnel
+          - --config
+          - /etc/cloudflared/config.yaml
+          - run
         volumeMounts:
-        - name: creds
-          mountPath: /etc/cloudflared
-          readOnly: true
+          - name: cloudflared-creds
+            mountPath: /etc/cloudflared
+            readOnly: true
       volumes:
-      - name: creds
-        secret:
-          secretName: cloudflared-creds
+        - name: cloudflared-creds
+          secret:
+            secretName: cloudflared-creds
