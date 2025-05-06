@@ -3,9 +3,10 @@
   "extends": ["config:recommended"],
   "regexManagers": [
     {
-      "fileMatch": ["^argo-applications/.*\\.ya?ml$"],
+      "fileMatch": ["^argo-applications/istio\\.yaml$"],
       "matchStrings": [
-        "chart:\\s*(?<packageName>istiod|base|gateway)\\s*\\n.*?targetRevision:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.-]+)[\"']?"
+        "chart:\\s*(?<packageName>base|istiod|gateway)\\s*\\n[\\s\\S]*?targetRevision:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.-]+)[\"']?",
+        "chart:\\s*(?<packageName>base|istiod|gateway)\\s*\\r?\\n[^\\S\\r\\n]*repoURL:[\\s\\S]*?targetRevision:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.-]+)[\"']?"
       ],
       "datasourceTemplate": "helm",
       "depNameTemplate": "istio/{{packageName}}",
@@ -14,11 +15,11 @@
   ],
   "packageRules": [
     {
-      "matchPackageNames": ["istio/istiod"],
+      "matchPackagePatterns": ["^istio/(base|istiod|gateway)$"],
       "matchCurrentVersion": "1.22.x",
       "allowedVersions": "1.22.x",
       "rangeStrategy": "replace",
-      "groupName": "istio patch updates"
+      "groupName": "istio components updates"
     }
   ]
 }
