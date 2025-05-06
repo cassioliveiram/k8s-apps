@@ -1,45 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "regexManagers": [
     {
-      "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-      "extends": ["config:recommended"],
-      "onboarding": false,
-      "requireConfig": false,
-      "packageRules": [
-        {
-          "matchManagers": ["helm-values"],
-          "enabled": true,
-          "repositories": [
-            {
-              "url": "https://istio-release.storage.googleapis.com/charts",
-              "name": "istiod"
-            }
-          ],
-          "matchPackageNames": ["istio/istiod"],
-          "matchCurrentVersion": "1.22.x",
-          "allowedVersions": "1.22.x",
-          "rangeStrategy": "replace",
-          "groupName": "istio patch updates",
-          "separateMinorPatch": true,
-          "automerge": false,
-          "ignoreUnstable": true
-        }
+      "fileMatch": ["^argo-applications/.*\\.ya?ml$"],
+      "matchStrings": [
+        "chart:\\s*(?<packageName>istiod|base|gateway)\\s*\\n.*?targetRevision:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.-]+)[\"']?"
       ],
-      "customManagers": [
-        {
-          "customType": "regex",
-          "fileMatch": ["^argo-applications/.*\\.ya?ml$"],
-          "matchStrings": [
-            "chart:\\s*(?<depName>istio)/(?<packageName>istiod)\\s*\\n.*?targetRevision:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.-]+)[\"']?"
-          ],
-          "datasourceTemplate": "helm",
-          "depNameTemplate": "istio/istiod",
-          "versioningTemplate": "semver"
-        }
-      ],
-      "hostRules": [
-        {
-          "hostType": "helm",
-          "matchHost": "https://istio-release.storage.googleapis.com",
-          "timeout": 300
-        }
-      ]
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "istio/{{packageName}}",
+      "versioningTemplate": "semver"
     }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["istio/istiod"],
+      "matchCurrentVersion": "1.22.x",
+      "allowedVersions": "1.22.x",
+      "rangeStrategy": "replace",
+      "groupName": "istio patch updates"
+    }
+  ]
+}
