@@ -7,7 +7,7 @@ metadata:
   labels:
     app: echoserver
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: echoserver
@@ -29,3 +29,4 @@ spec:
             requests:
               cpu: 10m
               memory: 10Mi
+
