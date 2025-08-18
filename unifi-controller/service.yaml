@@ -4,6 +4,8 @@ apiVersion: v1
 metadata:
   name: lb-unifi
   namespace: unifi-controller
+  annotations:
+    metallb.io/address-pool: lan-unifi
 spec:
   ports:
     - name: '8080'
@@ -26,21 +28,11 @@ spec:
       protocol: TCP
       port: 6789
       targetPort: 6789
-  selector:
-    name: unifi-ctrl
-  type: ClusterIP
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: lb-unifi-udp
-  namespace: unifi-controller
-spec:
-  ports:
     - name: '3478'
       protocol: UDP
       port: 3478
       targetPort: 3478
   selector:
     name: unifi-ctrl
-  type: ClusterIP
+  type: LoadBalancer
+  externalTrafficPolicy: Local
