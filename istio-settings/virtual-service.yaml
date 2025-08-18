@@ -25,3 +25,11 @@ spec:
             host: argocd-server.argocd.svc.cluster.local
             port:
               number: 80
+    - match:
+        - uri:
+            prefix: "/unifi"
+      route:
+        - destination:
+            host: lb-unifi.unifi-controller.svc.cluster.local
+            port:
+              number: 8443
