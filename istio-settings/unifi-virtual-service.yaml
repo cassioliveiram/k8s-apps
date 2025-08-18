@@ -1,0 +1,17 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: unifi-vs
+  namespace: unifi-controller
+spec:
+  hosts:
+  - "unifi.cmoreira.dev"
+  gateways:
+  - "istio-system/unifi-gw"
+  http:
+    - route:
+        - destination:
+            host: lb-unifi.unifi-controller.svc.cluster.local
+            port:
+              number: 8443

@@ -27,9 +27,9 @@ spec:
               number: 80
     - match:
         - uri:
-            prefix: "/unifi"
+            prefix: /grafana
       route:
         - destination:
-            host: lb-unifi.unifi-controller.svc.cluster.local
+            host: grafana-service.grafana-operator-system.svc.cluster.local
             port:
-              number: 8443
+              number: 3000
