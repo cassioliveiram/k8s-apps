@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: unifi-ctrl
-          image: 'docker.io/jacobalberty/unifi:v9.0'
+          image: 'docker.io/jacobalberty/unifi:v9.3'
           imagePullPolicy: Always
           ports:
             - containerPort: 3478
@@ -49,3 +49,4 @@ spec:
           requests:
             memory: 500M
             storage: 3Gi
+
