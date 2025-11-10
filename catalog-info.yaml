@@ -1,0 +1,10 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: k8s-apps
+  description: Project with home lab applications
+spec:
+  type: website
+  lifecycle: production
+  owner: platform-team
