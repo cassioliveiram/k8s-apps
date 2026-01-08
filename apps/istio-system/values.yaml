@@ -3,6 +3,7 @@ istiod:
     istioNamespace: istio-system
 
 gateway:
+  fullnameOverride: istio-ingress
   global:
     istioNamespace: istio-system
   service:
