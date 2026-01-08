@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: echoserver
-          image: honestica/echoserver:latest
+          image: honestica/echoserver:2fcc18e26686c002f36b9e72a9be2eb2163eb012
           ports:
             - containerPort: 8080
           resources:
