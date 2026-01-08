@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: echoserver
-          image: cruse/echoserver-arm:1.10
+          image: honestica/echoserver:latest
           ports:
             - containerPort: 8080
           resources:
