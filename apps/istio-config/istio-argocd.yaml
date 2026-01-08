@@ -1,0 +1,39 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: argocd-gw
+  namespace: istio-system
+spec:
+  selector:
+    app: istio-ingress
+    istio: ingress
+  servers:
+    - hosts:
+        - argocd.cmoreira.dev
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        mode: PASSTHROUGH
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: argocd-vs
+  namespace: istio-system
+spec:
+  gateways:
+    - istio-system/argocd-gw
+  hosts:
+    - argocd.cmoreira.dev
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: argocd-server.argocd.svc.cluster.local
+            port:
+              number: 443
