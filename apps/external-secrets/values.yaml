@@ -1,0 +1,22 @@
+external-secrets:
+  installCRDs: true
+
+clusterSecretStore:
+  enabled: true
+  name: aws-ssm
+spec:
+  provider:
+    aws:
+      service: ParameterStore
+      region: us-east-1
+      auth:
+        secretRef:
+          accessKeyIDSecretRef:
+            name: aws-credentials
+            namespace: external-secrets
+            key: access-key
+          secretAccessKeySecretRef:
+            name: aws-credentials
+            namespace: external-secrets
+            key: secret-key
+---
