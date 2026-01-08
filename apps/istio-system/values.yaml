@@ -1,6 +1,8 @@
 istiod:
   global:
     istioNamespace: istio-system
+  nodeSelector:
+    kubernetes.io/arch: amd64
 
 gateway:
   name: istio-ingress
@@ -10,5 +12,7 @@ gateway:
     type: NodePort
   autoscaling:
     enabled: false
+  nodeSelector:
+    kubernetes.io/arch: amd64
 
 base: {}
