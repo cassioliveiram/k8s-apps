@@ -1,0 +1,13 @@
+istiod:
+  global:
+    istioNamespace: istio-system
+
+gateway:
+  global:
+    istioNamespace: istio-system
+  service:
+    type: NodePort
+  autoscaling:
+    enabled: false
+
+base: {}

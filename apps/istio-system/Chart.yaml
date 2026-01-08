@@ -1,0 +1,16 @@
+apiVersion: v2
+name: istio-wrapper
+description: Wrapper chart to install Istio (base, istiod, gateway) via Helm dependencies
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: base
+    version: 1.28.2
+    repository: https://istio-release.storage.googleapis.com/charts
+  - name: istiod
+    version: 1.28.2
+    repository: https://istio-release.storage.googleapis.com/charts
+  - name: gateway
+    version: 1.28.2
+    repository: https://istio-release.storage.googleapis.com/charts
