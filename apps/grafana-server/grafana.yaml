@@ -18,20 +18,24 @@ spec:
     auth:
       disable_login_form: "false"
 
-    auth.azuread:
+    auth.generic_oauth:
       enabled: "true"
+      name: "Microsoft"
       allow_sign_up: "true"
-      client_id: "$__env{GF_AUTH_AZUREAD_CLIENT_ID}"
-      client_secret: "$__env{GF_AUTH_AZUREAD_CLIENT_SECRET}"
-      scopes: "openid email profile"
-      auth_url: "https://login.microsoftonline.com/$__env{GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/authorize"
-      token_url: "https://login.microsoftonline.com/$__env{GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/token"
+
+      client_id: "${GF_AUTH_AZUREAD_CLIENT_ID}"
+      client_secret: "${GF_AUTH_AZUREAD_CLIENT_SECRET}"
+
+      scopes: "openid profile email"
+
+      auth_url: "https://login.microsoftonline.com/${GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/authorize"
+      token_url: "https://login.microsoftonline.com/${GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/token"
       login_attribute_path: preferred_username
-      name_attribute_path: name
       email_attribute_path: preferred_username
-      allow_assign_grafana_admin: "true"
+      name_attribute_path: name
       role_attribute_path: >
-        (login == 'cassio@cmoreira.dev') && 'GrafanaAdmin' || 'Viewer'
+        (preferred_username == 'cassio@cmoreira.dev')
+        && 'GrafanaAdmin' || 'Viewer'
 
 
   deployment:
