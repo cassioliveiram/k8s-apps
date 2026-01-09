@@ -1,0 +1,48 @@
+tempo:
+  service:
+    type: ClusterIP
+
+  tempo:
+    retention: 24h
+
+    metricsGenerator:
+      enabled: true
+      remoteWriteUrl: "http://mimir-gateway.observability.svc.cluster.local/api/v1/push"
+
+    config: |
+      server:
+        http_listen_port: 3200
+
+      distributor:
+        receivers:
+          otlp:
+            protocols:
+              grpc:
+              http:
+
+      storage:
+        trace:
+          backend: local
+          local:
+            path: /var/tempo/traces
+
+      compactor:
+        compaction:
+          block_retention: 24h
+
+      metrics_generator:
+        storage:
+          path: /var/tempo/generator
+        processor:
+          span_metrics:
+            histogram_buckets: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2, 5]
+        traces_storage:
+          path: /var/tempo/generator/traces
+
+    overrides:
+      defaults:
+        metrics_generator:
+          processors:
+            - service-graphs
+            - span-metrics
+            - local-blocks

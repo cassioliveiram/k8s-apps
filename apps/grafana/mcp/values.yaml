@@ -1,0 +1,29 @@
+grafana-mcp:
+  grafana:
+    url: "http://grafana-service.observability.svc.cluster.local:3000"
+    apiKeySecret:
+      name: grafana-mcp
+      key: GRAFANA_API_KEY
+
+externalSecret:
+  enabled: true
+  name: grafana-mcp
+  namespace: observability
+
+  refreshInterval: 1h
+
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: aws-ssm
+
+  target:
+    name: grafana-mcp
+    creationPolicy: Owner
+    deletionPolicy: Retain
+    template:
+      type: Opaque
+
+  data:
+    - secretKey: GRAFANA_API_KEY
+      remoteRef:
+        key: /homelab/grafana/mcp-api-token

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: grafana-wrapper
+description: Wrapper chart to install Grafana charts via Helm dependencies
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: grafana-mcp
+    version: 0.2.2
+    repository: https://grafana.github.io/helm-charts

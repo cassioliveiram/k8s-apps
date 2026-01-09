@@ -1,0 +1,19 @@
+mimir-distributed:
+  global:
+    extraEnv: []
+  ingester:
+    replicas: 1
+    zoneAwareReplication:
+      enabled: false
+  ruler_querier:
+    replicas: 1
+  ruler_query_scheduler:
+    replicas: 1
+  querier:
+    replicas: 1
+  query_scheduler:
+    replicas: 1
+  store_gateway:
+    replicas: 1
+    zoneAwareReplication:
+      enabled: false
