@@ -7,7 +7,7 @@ tempo:
 
     metricsGenerator:
       enabled: true
-      remoteWriteUrl: "http://mimir-gateway.observability.svc.cluster.local/api/v1/push"
+      remoteWriteUrl: "http://mimir-gateway.mimir.svc.cluster.local/api/v1/push"
 
     config: |
       server:
