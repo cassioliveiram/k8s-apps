@@ -11,8 +11,9 @@ spec:
       level: info
     server:
       domain: "local.cmoreira.dev"
-      root_url: "%(protocol)s://%(domain)s/grafana"
+      root_url: "https://local.cmoreira.dev/grafana/"
       serve_from_sub_path: "true"
+      protocol: http
 
     auth:
       disable_login_form: "true"
