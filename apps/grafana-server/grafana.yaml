@@ -27,8 +27,8 @@ spec:
       auth_url: "https://login.microsoftonline.com/$__env{GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/authorize"
       token_url: "https://login.microsoftonline.com/$__env{GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/token"
       role_attribute_path: >
-        email == 'cassio@cmoreira.dev' && 'Admin' || 'Viewer'
-        
+        oid == '1fe7e82a-8395-4be9-86c0-ebb5fa8b6c1a' && 'Admin' || 'Viewer'
+
   deployment:
     spec:
       template:
