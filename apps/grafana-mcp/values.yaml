@@ -8,7 +8,7 @@ grafana-mcp:
 externalSecret:
   enabled: true
   name: grafana-mcp
-  namespace: observability
+  namespace: grafana-mcp
 
   refreshInterval: 1h
 
