@@ -39,7 +39,7 @@ spec:
             prefix: "/echo"
       route:
         - destination:
-            host: echoserver-service.echoserver-ns.svc.cluster.local
+            host: echoserver-service.echoserver.svc.cluster.local
             port:
               number: 80
     - match:
