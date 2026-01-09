@@ -1,0 +1,10 @@
+apiVersion: v2
+name: cert-manager-wrapper
+description: Wrapper chart to install Cert Manager via Helm dependencies
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: cerrt-manager
+    version: 1.19.2
+    repository: https://charts.jetstack.io
