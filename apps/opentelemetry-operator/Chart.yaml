@@ -1,0 +1,11 @@
+apiVersion: v2
+name: otel-operator-wrapper
+description: Wrapper chart to install Grafana charts via Helm dependencies
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: opentelemetry-operator
+    version: 0.102.0
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+

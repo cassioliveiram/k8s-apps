@@ -1,0 +1,101 @@
+---
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel
+  namespace: opentelemetry-collector
+spec:
+  mode: deployment
+  replicas: 1
+  upgradeStrategy: automatic
+  image: otel/opentelemetry-collector-contrib:0.128.0
+
+  ports:
+    - name: otlp-grpc
+      port: 4317
+      targetPort: 4317
+      protocol: TCP
+    - name: otlp-http
+      port: 4318
+      targetPort: 4318
+      protocol: TCP
+    - name: prom-metrics
+      port: 8889
+      targetPort: 8889
+      protocol: TCP
+
+  observability:
+    metrics:
+      enableMetrics: true   
+
+  config:
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "0.0.0.0:4317"
+          http:
+            endpoint: "0.0.0.0:4318"
+
+
+    processors:
+      resource:
+        attributes:
+          - action: insert
+            key: environment
+            value: homelab
+          - action: upsert
+            from_attribute: service.name
+            key: service_name
+
+      batch: {}
+
+      filter:
+        logs:
+          include:
+            severity_number:
+              min: WARN
+
+
+    connectors:
+      spanmetrics:
+        namespace: spanmetrics
+        dimensions:
+          - name: http.method
+          - name: http.status_code
+        histogram:
+          explicit:
+            buckets: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2, 5]
+
+    exporters:
+      otlp/tempo:
+        endpoint: tempo.observability.svc.cluster.local:4317
+        tls:
+          insecure: true
+
+      # loki:
+      #   endpoint: http://10.4.66.249:3100/loki/api/v1/push
+
+      prometheusremotewrite/mimir:
+        endpoint: http://mimir-gateway.observability.svc.cluster.local/api/v1/push
+
+
+    service:
+      telemetry:
+        metrics:
+          level: none
+
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [resource, batch]
+          exporters: [otlp/tempo,spanmetrics]
+        # logs:
+        #   receivers: [otlp]
+        #   processors: [resource,filter, batch]
+        #   exporters: [loki]
+        metrics:
+          receivers: [otlp,spanmetrics]
+          processors: [resource, batch]
+          exporters: [prometheusremotewrite/mimir]
+
