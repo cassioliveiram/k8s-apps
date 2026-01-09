@@ -26,8 +26,9 @@ spec:
       scopes: "openid email profile"
       auth_url: "https://login.microsoftonline.com/$__env{GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/authorize"
       token_url: "https://login.microsoftonline.com/$__env{GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/token"
+      email_attribute_path: preferred_username
       role_attribute_path: >
-        (email == 'cassio@cmoreira.dev' || email == 'cassioliveiram@gmail.com') && 'Admin' || 'Viewer'
+        (login == 'cassio@cmoreira.dev' || email == 'cassioliveiram@gmail.com') && 'Admin' || 'Viewer'
 
 
   deployment:
