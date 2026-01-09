@@ -8,7 +8,7 @@ spec:
   version: 12.3.1
   config:
     log:
-      level: info
+      level: debug
     server:
       domain: "local.cmoreira.dev"
       root_url: "https://local.cmoreira.dev/grafana/"
