@@ -10,6 +10,7 @@ spec:
     log:
       level: info
     server:
+      domain: "local.cmoreira.dev"
       root_url: "%(protocol)s://%(domain)s/grafana"
       serve_from_sub_path: "true"
 
