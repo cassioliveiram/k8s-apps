@@ -1,0 +1,30 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg-backstage
+  namespace: backstage
+spec:
+  instances: 1
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
+
+  storage:
+    size: 4Gi
+
+  resources:
+    requests:
+      cpu: "30m"
+      memory: "128Mi"
+    limits:
+      cpu: "40"
+      memory: "256Mi"
+
+  bootstrap:
+    initdb:
+      database: backstagedb
+      owner: backstageuser
+
+  postgresql:
+    parameters:
+      max_connections: "20"
+      shared_buffers: "64Mi"
