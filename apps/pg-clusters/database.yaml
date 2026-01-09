@@ -13,10 +13,10 @@ spec:
 
   resources:
     requests:
-      cpu: "30m"
+      cpu: "70m"
       memory: "128Mi"
     limits:
-      cpu: "40m"
+      cpu: "100m"
       memory: "256Mi"
 
   bootstrap:
