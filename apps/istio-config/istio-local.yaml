@@ -47,6 +47,6 @@ spec:
             prefix: /grafana
       route:
         - destination:
-            host: grafana-service.grafana-operator-system.svc.cluster.local
+            host: grafana-service.grafana-server.svc.cluster.local
             port:
               number: 3000

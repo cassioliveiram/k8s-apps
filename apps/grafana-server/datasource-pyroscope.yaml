@@ -1,0 +1,19 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: ds-pyroscope
+  namespace: observability
+spec:
+  instanceSelector:
+    matchLabels:
+      instance: grafana
+  datasource:
+    name: Pyroscope
+    type: phlare
+    uid: pyroscope
+    access: proxy
+    url: http://pyroscope.observability.svc.cluster.local:4040
+    editable: true
+
+

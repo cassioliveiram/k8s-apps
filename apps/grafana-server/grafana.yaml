@@ -1,0 +1,31 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: grafana
+spec:
+  config:
+    server:
+      root_url: "%(protocol)s://%(domain)s/grafana"
+      serve_from_sub_path: "true"
+
+    auth:
+      disable_login_form: "true"
+
+    auth.azuread:
+      enabled: "true"
+      allow_sign_up: "true"
+      client_id: "$__env{GF_AUTH_AZUREAD_CLIENT_ID}"
+      client_secret: "$__env{GF_AUTH_AZUREAD_CLIENT_SECRET}"
+      scopes: "openid email profile"
+      auth_url: "https://login.microsoftonline.com/$__env{GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/authorize"
+      token_url: "https://login.microsoftonline.com/$__env{GF_AUTH_AZUREAD_TENANT_ID}/oauth2/v2.0/token"
+
+  deployment:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: grafana
+              envFrom:
+                - secretRef:
+                    name: grafana-azuread
