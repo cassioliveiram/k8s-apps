@@ -1,25 +1,38 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
   "extends": ["config:recommended"],
-  "regexManagers": [
-    {
-      "fileMatch": ["^argo-applications/istio\\.yaml$"],
-      "matchStrings": [
-        "chart:\\s*(?<packageName>base|istiod|gateway)\\s*\\n[\\s\\S]*?targetRevision:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.-]+)[\"']?",
-        "chart:\\s*(?<packageName>base|istiod|gateway)\\s*\\r?\\n[^\\S\\r\\n]*repoURL:[\\s\\S]*?targetRevision:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.-]+)[\"']?"
-      ],
-      "datasourceTemplate": "helm",
-      "depNameTemplate": "istio/{{packageName}}",
-      "versioningTemplate": "semver"
-    }
-  ],
+
+  "enabledManagers": ["helmv3"],
+
+  "includePaths": ["apps/**"],
+
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard (Helm charts in /apps)",
+
   "packageRules": [
     {
-      "matchPackagePatterns": ["^istio/(base|istiod|gateway)$"],
-      "matchCurrentVersion": "1.22.x",
-      "allowedVersions": "1.22.x",
-      "rangeStrategy": "replace",
-      "groupName": "istio components updates"
+      "matchManagers": ["helmv3"],
+      "matchPaths": ["apps/**"],
+      "groupName": "helm dependencies (apps)"
+    },
+
+    {
+      "matchManagers": ["helmv3"],
+      "matchDepNames": ["cert-manager"],
+      "groupName": "cert-manager updates"
+    },
+
+    {
+      "matchManagers": ["helmv3"],
+      "matchDepNames": ["external-secrets"],
+      "groupName": "external-secrets updates"
+    },
+
+    {
+      "matchManagers": ["helmv3"],
+      "matchDepNames": ["grafana-operator", "grafana"],
+      "groupName": "grafana stack updates"
     }
   ]
 }
