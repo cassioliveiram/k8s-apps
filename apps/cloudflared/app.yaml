@@ -1,0 +1,4 @@
+app: cloudflared
+namespace: cloudflared
+releaseName: cloudflared
+type: kustomize
