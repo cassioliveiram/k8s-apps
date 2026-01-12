@@ -1,0 +1,11 @@
+apiVersion: v2
+name: alloy-operator-wrapper
+description: Wrapper chart to install Grafana Alloy Operator via Helm dependencies
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: alloy-operator
+    version: 0.3.13
+    repository: https://grafana.github.io/helm-charts/
+
