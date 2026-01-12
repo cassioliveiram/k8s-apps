@@ -13,7 +13,7 @@
   "packageRules": [
     {
       "matchManagers": ["helmv3"],
-      "matchPaths": ["apps/**"],
+      "matchFileNames": ["apps/**"],
       "groupName": "helm dependencies (apps)"
     },
 
