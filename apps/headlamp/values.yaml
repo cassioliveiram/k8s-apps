@@ -7,4 +7,4 @@ config:
       create: false
     externalSecret:
       enabled: true
-      name: headlamp-oidc
+      name: oidc
