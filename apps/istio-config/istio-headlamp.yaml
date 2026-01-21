@@ -32,6 +32,13 @@ spec:
     - match:
         - uri:
             prefix: /
+      headers:
+        request:
+          set:
+            x-forwarded-proto: "https"
+            x-forwarded-host: "headlamp.cmoreira.dev"
+            x-forwarded-port: "443"
+            forwarded: 'proto=https;host=headlamp.cmoreira.dev'
       route:
         - destination:
             host: headlamp.headlamp.svc.cluster.local
