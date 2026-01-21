@@ -12,7 +12,7 @@ spec:
     type: tempo
     uid: tempo
     access: proxy
-    url: http://tempo.observability.svc.cluster.local:3200
+    url: http://tempo.tempo.svc.cluster.local:3200
     editable: true
     jsonData:
       httpMethod: GET

@@ -12,7 +12,7 @@ spec:
     type: phlare
     uid: pyroscope
     access: proxy
-    url: http://pyroscope.observability.svc.cluster.local:4040
+    url: http://pyroscope.pyroscope.svc.cluster.local:4040
     editable: true
 
 
