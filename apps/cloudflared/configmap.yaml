@@ -13,4 +13,6 @@ data:
         service: http://istio-ingress.istio-system.svc.cluster.local:80
       - hostname: argocd.cmoreira.dev
         service: http://istio-ingress.istio-system.svc.cluster.local:80
+      - hostname: headlamp.cmoreira.dev
+        service: http://istio-ingress.istio-system.svc.cluster.local:80
       - service: http_status:404
