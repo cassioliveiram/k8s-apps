@@ -1,6 +1,7 @@
 headlamp:
   config:
     inCluster: true
+    baseURL: "https://headlamp.cmoreira.dev"
     oidc:
       secret:
         create: false
