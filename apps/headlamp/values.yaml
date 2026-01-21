@@ -1,0 +1,8 @@
+grafana-mcp:
+config:
+  inCluster: true
+  baseURL: "headlamp.cmoreira.dev"
+  oidc:
+    secret:
+      create: false
+      name: oidc

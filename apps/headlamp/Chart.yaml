@@ -1,0 +1,10 @@
+apiVersion: v2
+name: headlamp-wrapper
+description: Wrapper chart to install HeadLamp chart via Helm dependencies
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: headlamp
+    version: 0.39.0
+    repository: https://kubernetes-sigs.github.io/headlamp/

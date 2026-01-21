@@ -1,0 +1,39 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: headlamp-gw
+  namespace: istio-system
+spec:
+  selector:
+    app: istio-ingress
+    istio: ingress
+  servers:
+    - hosts:
+        - headlamp.cmoreira.dev
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        mode: PASSTHROUGH
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: headlamp-vs
+  namespace: istio-system
+spec:
+  gateways:
+    - istio-system/headlamp-gw
+  hosts:
+    - headlamp.cmoreira.dev
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: headlamp.headlamp.svc.cluster.local
+            port:
+              number: 443
