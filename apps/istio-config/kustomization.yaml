@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - istio-argocd.yaml
   - istio-local.yaml
+  - istio-headlamp.yaml
