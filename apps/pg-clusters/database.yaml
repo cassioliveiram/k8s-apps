@@ -23,6 +23,8 @@ spec:
     initdb:
       database: backstagedb
       owner: backstageuser
+      postInitSQL:
+        - "ALTER ROLE backstageuser CREATEDB;"
 
   postgresql:
     parameters:

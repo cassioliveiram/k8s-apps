@@ -10,7 +10,7 @@ externalSecret:
   name: grafana-mcp
   namespace: grafana-mcp
 
-  refreshInterval: 1h
+  refreshInterval: 24h
 
   secretStoreRef:
     kind: ClusterSecretStore
