@@ -6,5 +6,5 @@ version: 0.1.0
 
 dependencies:
   - name: mimir-distributed
-    version: 6.1.0-weekly.378
+    version: 6.1.0-weekly.379
     repository: https://grafana.github.io/helm-charts
