@@ -69,7 +69,7 @@ spec:
 
     exporters:
       otlp/tempo:
-        endpoint: tempo.observability.svc.cluster.local:4317
+        endpoint: tempo.tempo.svc.cluster.local:4317
         tls:
           insecure: true
 
@@ -77,7 +77,7 @@ spec:
       #   endpoint: http://10.4.66.249:3100/loki/api/v1/push
 
       prometheusremotewrite/mimir:
-        endpoint: http://mimir-gateway.observability.svc.cluster.local/api/v1/push
+        endpoint: http://mimir-gateway.mimir.svc.cluster.local/api/v1/push
 
 
     service:
