@@ -22,7 +22,7 @@ spec:
         prometheus.scrape "alloy_self" {
           targets         = prometheus.exporter.self.alloy.targets
           scrape_interval = "15s"
-          forward_to      = [prometheus.remote_write.mimir.receiver]
+          forward_to      = [prometheus.relabel.add_cluster.receiver]
         }
 
         discovery.kubernetes "kube_state_metrics_eps" {
@@ -64,13 +64,23 @@ spec:
         prometheus.scrape "node" {
           targets         = prometheus.exporter.unix.node.targets
           scrape_interval = "30s"
-          forward_to      = [prometheus.remote_write.mimir.receiver]
+          forward_to      = [prometheus.relabel.add_cluster.receiver]
+        }
+
+        prometheus.relabel "add_cluster" {
+        forward_to = [prometheus.remote_write.mimir.receiver]
+
+          rule {
+            target_label = "cluster"
+            replacement  = "homelab-k3s"
+            action       = "replace"
+          }
         }
 
         prometheus.scrape "kube_state_metrics" {
           targets         = discovery.relabel.kube_state_metrics.output
           scrape_interval = "30s"
-          forward_to      = [prometheus.remote_write.mimir.receiver]
+          forward_to      = [prometheus.relabel.add_cluster.receiver]
         }
 
 
