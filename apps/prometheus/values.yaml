@@ -1,0 +1,16 @@
+kube-prometheus-stack:
+  defaultRules:
+    create: false
+  alertmanager:
+    enabled: false
+  grafana:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  prometheus:
+    enabled: true
+    prometheusSpec: 
+      retention: 3d
+      retentionSize: "5GiB"

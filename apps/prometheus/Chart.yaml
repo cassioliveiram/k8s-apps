@@ -1,0 +1,11 @@
+apiVersion: v2
+name: kube-prometheus-stack-wrapper
+description: Wrapper chart to install Prometheus Operator via Helm dependencies
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: kube-prometheus-stack
+    version: 0.102.0
+    repository: oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
+
