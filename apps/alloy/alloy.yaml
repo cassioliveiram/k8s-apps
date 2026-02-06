@@ -26,29 +26,28 @@ spec:
         }
 
         discovery.kubernetes "kube_state_metrics_eps" {
-          role = "endpointslices"
+          role = "endpointslice"
         }
 
         discovery.relabel "kube_state_metrics" {
           targets = discovery.kubernetes.kube_state_metrics_eps.targets
 
+          // namespace do endpointslice
           rule {
             source_labels = ["__meta_kubernetes_namespace"]
             regex         = "prometheus"
             action        = "keep"
           }
 
+          // filtra pelo label kubernetes.io/service-name = prometheus-kube-state-metrics
           rule {
-            source_labels = ["__meta_kubernetes_service_name"]
+            source_labels = ["__meta_kubernetes_endpointslice_label_kubernetes_io_service_name"]
             regex         = "prometheus-kube-state-metrics"
             action        = "keep"
           }
 
-          rule {
-            source_labels = ["__meta_kubernetes_endpoint_port"]
-            regex         = "8080"
-            action        = "keep"
-          }
+          // (opcional) porta — vamos deixar SEM filtro primeiro pra validar
+          // depois refinamos se você quiser.
 
           rule {
             target_label = "job"
