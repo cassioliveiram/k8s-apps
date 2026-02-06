@@ -5,7 +5,6 @@ metadata:
   name: alloy
   namespace: alloy
 spec:
-  image: grafana/alloy:latest
   configMap:
     name: alloy-config
     key: config.alloy
