@@ -54,9 +54,8 @@ data:
     // Discovery: Endpoints (kube-state-metrics sem mexer no chart)
     // =====================
     discovery.kubernetes "endpoints" {
-      role = "endpoints"
-    }
-
+        role = "endpoints"
+      }
     discovery.relabel "kube_state_metrics" {
       targets = discovery.kubernetes.endpoints.targets
 
