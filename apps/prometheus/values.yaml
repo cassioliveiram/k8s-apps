@@ -14,3 +14,5 @@ kube-prometheus-stack:
     prometheusSpec: 
       retention: 3d
       retentionSize: "5GiB"
+      remoteWrite:
+      - url: http://mimir-gateway.mimir.svc.cluster.local/api/v1/push
