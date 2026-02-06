@@ -5,8 +5,50 @@ metadata:
   name: alloy
   namespace: alloy
 spec:
-  configMap:
-    name: alloy-config
-    key: config.alloy
-  service:
-    enabled: true
+  controller:
+    type: daemonset
+
+  alloy:
+    configMap:
+      content: |-
+        // Remote write -> Mimir (adicionei OrgID pra não te travar em multi-tenant)
+        prometheus.remote_write "mimir" {
+          endpoint {
+            url = "http://mimir-gateway.mimir.svc.cluster.local/api/v1/push"
+            # headers = { "X-Scope-OrgID" = "1" }
+          }
+        }
+
+        // Prova de vida: métricas do próprio Alloy -> Mimir
+        prometheus.exporter.self "alloy" {}
+        prometheus.scrape "alloy_self" {
+          targets         = prometheus.exporter.self.alloy.targets
+          scrape_interval = "15s"
+          forward_to      = [prometheus.remote_write.mimir.receiver]
+        }
+
+        // kube-state-metrics via EndpointSlice (sem mexer no deploy)
+        discovery.kubernetes "kube_state_metrics_eps" {
+          role = "endpointslices"
+        }
+
+        discovery.relabel "kube_state_metrics" {
+          targets = discovery.kubernetes.kube_state_metrics_eps.targets
+
+          rule { source_labels = ["__meta_kubernetes_namespace"] action = "keep" regex = "prometheus" }
+          rule { source_labels = ["__meta_kubernetes_service_name"] action = "keep" regex = "prometheus-kube-state-metrics" }
+          rule { source_labels = ["__meta_kubernetes_endpoint_port"] action = "keep" regex = "8080" }
+
+          rule { target_label = "job" action = "replace" replacement = "kube-state-metrics" }
+        }
+
+        prometheus.scrape "kube_state_metrics" {
+          targets         = discovery.relabel.kube_state_metrics.output
+          scrape_interval = "30s"
+          forward_to      = [prometheus.remote_write.mimir.receiver]
+        }
+
+
+
+
+
