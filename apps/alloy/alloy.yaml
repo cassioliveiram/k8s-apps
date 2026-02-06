@@ -16,7 +16,8 @@ spec:
             url = "http://mimir-gateway.mimir.svc.cluster.local/api/v1/push"
 
             headers {
-              "X-Scope-OrgID" = "1"
+              key   = "X-Scope-OrgID"
+              value = "1"
             }
           }
         }
@@ -66,7 +67,6 @@ spec:
           scrape_interval = "30s"
           forward_to      = [prometheus.remote_write.mimir.receiver]
         }
-
 
 
 
