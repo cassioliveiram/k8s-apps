@@ -56,14 +56,13 @@ spec:
           }
         }
 
-        prometheus.exporter.node "node" {
-          procfs_path = "/host/proc"
-          sysfs_path  = "/host/sys"
-          rootfs_path = "/host/root"
+        prometheus.exporter.unix "node" {
+          procfs_path = "/proc"
+          sysfs_path  = "/sys"
         }
 
         prometheus.scrape "node" {
-          targets         = prometheus.exporter.node.node.targets
+          targets         = prometheus.exporter.unix.node.targets
           scrape_interval = "30s"
           forward_to      = [prometheus.remote_write.mimir.receiver]
         }
