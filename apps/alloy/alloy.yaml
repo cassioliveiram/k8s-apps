@@ -1,0 +1,13 @@
+---
+apiVersion: collectors.grafana.com/v1alpha1
+kind: Alloy
+metadata:
+  name: alloy
+  namespace: alloy
+spec:
+  image: grafana/alloy:latest
+  configMap:
+    name: alloy-config
+    key: config.alloy
+  service:
+    enabled: true
