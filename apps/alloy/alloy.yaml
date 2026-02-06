@@ -83,6 +83,53 @@ spec:
           forward_to      = [prometheus.relabel.add_cluster.receiver]
         }
 
+        discovery.kubernetes "nodes" {
+          role = "node"
+        }
+
+        discovery.relabel "kubelet" {
+          targets = discovery.kubernetes.nodes.targets
+
+          // aponta para a porta do kubelet
+          rule {
+            target_label = "__address__"
+            replacement  = "$1:10250"
+            source_labels = ["__meta_kubernetes_node_address_InternalIP"]
+            action       = "replace"
+          }
+
+          // caminho cadvisor
+          rule {
+            target_label = "__metrics_path__"
+            replacement  = "/metrics/cadvisor"
+            action       = "replace"
+          }
+
+          // labels úteis
+          rule {
+            source_labels = ["__meta_kubernetes_node_name"]
+            target_label  = "node"
+            action        = "replace"
+          }
+        }
+
+        prometheus.scrape "kubelet_cadvisor" {
+          targets         = discovery.relabel.kubelet.output
+          scrape_interval = "30s"
+          scheme          = "https"
+
+          tls_config {
+            insecure_skip_verify = true
+          }
+
+          authorization {
+            type = "Bearer"
+            credentials_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+          }
+
+          forward_to = [prometheus.relabel.add_cluster.receiver]
+        }
+
 
 
 
