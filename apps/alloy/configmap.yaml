@@ -6,9 +6,28 @@ metadata:
   namespace: alloy
 data:
   config.alloy: |
-    // Feito com AI
     // =====================
-    // Discovery: Pods (opt-in por annotations)
+    // Remote write: Mimir
+    // =====================
+    prometheus.remote_write "mimir" {
+      endpoint {
+        url = "http://mimir-gateway.mimir.svc.cluster.local/api/v1/push"
+      }
+    }
+
+    // =====================
+    // 0) Prova de vida: métricas do próprio Alloy -> Mimir
+    // =====================
+    prometheus.exporter.self "alloy" {}
+
+    prometheus.scrape "alloy_self" {
+      targets         = prometheus.exporter.self.alloy.targets
+      scrape_interval = "15s"
+      forward_to      = [prometheus.remote_write.mimir.receiver]
+    }
+
+    // =====================
+    // 1) Discovery: Pods (opt-in por annotations)
     // =====================
     discovery.kubernetes "pods" {
       role = "pod"
@@ -51,52 +70,38 @@ data:
     }
 
     // =====================
-    // Discovery: Endpoints (kube-state-metrics sem mexer no chart)
+    // 2) kube-state-metrics via EndpointSlice (sem mexer no chart)
     // =====================
-    discovery.kubernetes "endpoints" {
-        role = "endpoints"
-      }
-    discovery.relabel "kube_state_metrics" {
-      targets = discovery.kubernetes.endpoints.targets
+    discovery.kubernetes "kube_state_metrics_eps" {
+      role = "endpointslices"
+    }
 
-      // Namespace do service
+    discovery.relabel "kube_state_metrics" {
+      targets = discovery.kubernetes.kube_state_metrics_eps.targets
+
       rule {
         source_labels = ["__meta_kubernetes_namespace"]
         regex         = "prometheus"
         action        = "keep"
       }
 
-      // Nome do service/endpoints
       rule {
-        source_labels = ["__meta_kubernetes_endpoints_name"]
+        source_labels = ["__meta_kubernetes_service_name"]
         regex         = "prometheus-kube-state-metrics"
         action        = "keep"
       }
 
-      // Garante que vamos na porta 8080
-      // (em endpoints, geralmente vem o nome da porta também, mas o mais confiável é filtrar por número)
       rule {
-        source_labels = ["__address__"]
-        regex         = ".*:8080"
+        source_labels = ["__meta_kubernetes_endpoint_port"]
+        regex         = "8080"
         action        = "keep"
       }
 
-      // Labels úteis no Mimir/Grafana
-      rule { target_label = "job"       replacement = "kube-state-metrics" action = "replace" }
-      rule { target_label = "namespace" replacement = "prometheus"         action = "replace" }
+      rule { target_label = "job" replacement = "kube-state-metrics" action = "replace" }
     }
 
     prometheus.scrape "kube_state_metrics" {
       targets         = discovery.relabel.kube_state_metrics.output
       scrape_interval = "30s"
       forward_to      = [prometheus.remote_write.mimir.receiver]
-    }
-
-    // =====================
-    // Remote write: Mimir
-    // =====================
-    prometheus.remote_write "mimir" {
-      endpoint {
-        url = "http://mimir-gateway.mimir.svc.cluster.local/api/v1/push"
-      }
     }
