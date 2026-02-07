@@ -43,7 +43,7 @@ spec:
         attributes:
           - action: insert
             key: environment
-            value: homelab
+            value: homelab-k3s
           - action: upsert
             from_attribute: service.name
             key: service_name

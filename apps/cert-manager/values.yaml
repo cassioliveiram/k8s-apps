@@ -1,21 +1,5 @@
 cert-manager:
   installCRDs: true
-  service:
-    annotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/port: "9402"
-      prometheus.io/path: "/metrics"
-
-cainjector:
-  service:
-    annotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/port: "9402"
-      prometheus.io/path: "/metrics"
-
-webhook:
-  service:
-    annotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/port: "9402"
-      prometheus.io/path: "/metrics"
+  prometheus:
+    servicemonitor:
+      enabled: true

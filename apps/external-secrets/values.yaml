@@ -1,5 +1,7 @@
 external-secrets:
   installCRDs: true
+  serviceMonitor:
+    enabled: true
 
 clusterSecretStore:
   enabled: true

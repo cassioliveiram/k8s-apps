@@ -30,3 +30,6 @@ spec:
     parameters:
       max_connections: "20"
       shared_buffers: "64MB"
+  
+  monitoring:
+    enablePodMonitor: true
