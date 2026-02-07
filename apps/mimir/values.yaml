@@ -17,3 +17,8 @@ mimir-distributed:
     replicas: 1
     zoneAwareReplication:
       enabled: false
+
+  runtimeConfig:
+  overrides:
+    anonymous:
+      max_global_series_per_user: 450000

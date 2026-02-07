@@ -15,4 +15,8 @@ kube-prometheus-stack:
       retention: 3d
       retentionSize: "5GiB"
       remoteWrite:
-      - url: http://mimir-gateway.mimir.svc.cluster.local/api/v1/push
+        - url: http://mimir-gateway.mimir.svc.cluster.local/api/v1/push
+      writeRelabelConfigs:
+        - sourceLabels: [__name__]
+          regex: 'apiserver_request_duration_seconds_bucket|apiserver_request_body_size_bucket|apiserver_response_sizes_bucket'
+          action: drop
