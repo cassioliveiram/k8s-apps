@@ -6,9 +6,9 @@ kube-prometheus-stack:
   grafana:
     enabled: false
   kubeEtcd:
-    enabled: false
+    enabled: true
   nodeExporter:
-    enabled: false
+    enabled: true
   prometheus:
     enabled: true
     prometheusSpec: 
