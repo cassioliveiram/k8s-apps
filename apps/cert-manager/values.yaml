@@ -3,3 +3,5 @@ cert-manager:
   prometheus:
     servicemonitor:
       enabled: true
+      labels:
+        release: prometheus

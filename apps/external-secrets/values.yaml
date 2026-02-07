@@ -2,6 +2,8 @@ external-secrets:
   installCRDs: true
   serviceMonitor:
     enabled: true
+    additionalLabels:
+      release: prometheus
 
 clusterSecretStore:
   enabled: true
