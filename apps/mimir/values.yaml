@@ -19,6 +19,6 @@ mimir-distributed:
       enabled: false
 
   runtimeConfig:
-  overrides:
-    anonymous:
-      max_global_series_per_user: 450000
+    overrides:
+      anonymous:
+        max_global_series_per_user: 450000
