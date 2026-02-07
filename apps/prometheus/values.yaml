@@ -12,6 +12,8 @@ kube-prometheus-stack:
   prometheus:
     enabled: true
     prometheusSpec: 
+      externalLabels:
+        cluster: homelab-k3s
       retention: 3d
       retentionSize: "5GiB"
       remoteWrite:
