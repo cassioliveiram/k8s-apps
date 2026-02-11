@@ -13,11 +13,11 @@ spec:
 
   resources:
     requests:
-      cpu: "70m"
-      memory: "128Mi"
+      cpu: "100"
+      memory: "384Mi"
     limits:
       cpu: "100m"
-      memory: "256Mi"
+      memory: "384Mi"
 
   bootstrap:
     initdb:
@@ -28,7 +28,7 @@ spec:
 
   postgresql:
     parameters:
-      max_connections: "20"
+      max_connections: "30"
       shared_buffers: "64MB"
   
   monitoring:
