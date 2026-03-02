@@ -88,4 +88,4 @@ spec:
   trafficPolicy:
     tls:
       mode: SIMPLE
-      sni: proxmox.local
+      insecureSkipVerify: true
