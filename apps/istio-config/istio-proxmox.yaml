@@ -1,0 +1,68 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: proxmox-gw
+  namespace: istio-system
+spec:
+  selector:
+    app: istio-ingress
+    istio: ingress
+  servers:
+    - hosts:
+        - proxmox.cmoreira.dev
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        mode: PASSTHROUGH
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: proxmox-vs
+  namespace: istio-system
+spec:
+  gateways:
+    - istio-system/proxmox-gw
+  hosts:
+    - proxmox.cmoreira.dev
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: proxmox.local
+            port:
+              number: 443
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: proxmox-external-dr
+  namespace: istio-system
+spec:
+  host: proxmox.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+      insecureSkipVerify: true
+---
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: proxmox-external
+  namespace: istio-system
+spec:
+  hosts:
+    - proxmox.local
+  location: MESH_EXTERNAL
+  ports:
+    - number: 8006
+      name: https-proxmox
+      protocol: HTTPS
+  resolution: STATIC
+  endpoints:
+    - address: 192.168.1.2

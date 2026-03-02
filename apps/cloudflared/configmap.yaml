@@ -10,10 +10,8 @@ data:
     ingress:
       - hostname: local.cmoreira.dev
         service: http://istio-ingress.istio-system.svc.cluster.local:80
-      - hostname: proxmox.local.cmoreira.dev
-        service: https://192.168.1.2:8006
-        originRequest:
-          noTLSVerify: true
+      - hostname: proxmox.cmoreira.dev
+        service: http://istio-ingress.istio-system.svc.cluster.local:80
       - hostname: argocd.cmoreira.dev
         service: http://istio-ingress.istio-system.svc.cluster.local:80
       - hostname: headlamp.cmoreira.dev
