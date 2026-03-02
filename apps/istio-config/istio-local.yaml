@@ -53,8 +53,39 @@ spec:
     - match:
         - uri:
             prefix: /proxmox
+      rewrite:
+        uri: /
       route:
         - destination:
-            host: 192.168.1.2
+            host: proxmox.local
             port:
               number: 8006
+---
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: proxmox-external
+  namespace: istio-system
+spec:
+  hosts:
+    - proxmox.local
+  location: MESH_EXTERNAL
+  ports:
+    - number: 8006
+      name: https-proxmox
+      protocol: HTTPS
+  resolution: STATIC
+  endpoints:
+    - address: 192.168.1.2
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: proxmox-external-dr
+  namespace: istio-system
+spec:
+  host: proxmox.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+      sni: proxmox.local
