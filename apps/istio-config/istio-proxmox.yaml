@@ -36,7 +36,7 @@ spec:
         - destination:
             host: proxmox.local
             port:
-              number: 443
+              number: 8006
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
