@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: echoserver-service
   namespace: echoserver
+  labels:
+    backstage.io/kubernetes-id: homelab-bootstrap-k3s
 spec:
   selector:
     app: echoserver
