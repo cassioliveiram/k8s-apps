@@ -14,7 +14,7 @@ metadata:
     - url: https://headlamp.cmoreira.dev
       title: Headlamp
       icon: web
-annotation:
+annotations:
   backstage.io/kubernetes-id: homelab-bootstrap-k3s
 spec:
   type: website
