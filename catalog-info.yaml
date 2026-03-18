@@ -18,3 +18,5 @@ spec:
   type: website
   lifecycle: production
   owner: platform-team
+  dependsOn:
+    - component:homelab-bootstrap-k3s
