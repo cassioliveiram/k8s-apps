@@ -4,6 +4,16 @@ kind: Component
 metadata:
   name: k8s-apps
   description: Project with home lab applications
+  links:
+    - url: https://local.cmoreira.dev/grafana
+      title: Grafana Dashboard
+      icon: dashboard
+    - url: https://argocd.cmoreira.dev
+      title: GitOps
+      icon: argocd
+    - url: https://headlamp.cmoreira.dev
+      title: Headlamp
+      icon: web
 spec:
   type: website
   lifecycle: production
