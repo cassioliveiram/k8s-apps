@@ -4,6 +4,8 @@ kind: Component
 metadata:
   name: k8s-apps
   description: Project with home lab applications
+  annotations:
+    backstage.io/kubernetes-id: homelab-bootstrap-k3s
   links:
     - url: https://local.cmoreira.dev/grafana
       title: Grafana Dashboard
@@ -14,8 +16,6 @@ metadata:
     - url: https://headlamp.cmoreira.dev
       title: Headlamp
       icon: web
-annotations:
-  backstage.io/kubernetes-id: homelab-bootstrap-k3s
 spec:
   type: website
   lifecycle: production
