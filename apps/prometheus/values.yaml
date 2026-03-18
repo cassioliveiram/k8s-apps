@@ -6,11 +6,11 @@ kube-prometheus-stack:
   grafana:
     enabled: false
   kubeEtcd:
-    enabled: true
+    enabled: false
   nodeExporter:
-    enabled: true
+    enabled: false
   prometheus:
-    enabled: true
+    enabled: false
     prometheusSpec: 
       externalLabels:
         cluster: homelab-k3s
