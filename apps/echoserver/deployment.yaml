@@ -6,6 +6,7 @@ metadata:
   namespace: echoserver
   labels:
     app: echoserver
+    backstage.io/kubernetes-id: homelab-bootstrap-k3s
 spec:
   replicas: 1
   selector:
