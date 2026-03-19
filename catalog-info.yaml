@@ -11,6 +11,7 @@ metadata:
   annotations:
     github.com/project-slug: cassioliveiram/k8s-apps
     backstage.io/kubernetes-id: homelab-bootstrap-k3s
+    argocd/app-name: echoserver
   links:
     - url: https://local.cmoreira.dev/grafana
       title: Grafana Dashboard
