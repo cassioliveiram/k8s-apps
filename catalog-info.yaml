@@ -4,7 +4,12 @@ kind: Component
 metadata:
   name: k8s-apps
   description: Project with home lab applications
+  tags:
+    - kubernetes
+    - homelab
+    - infrastructure
   annotations:
+    github.com/project-slug: cassioliveiram/k8s-apps
     backstage.io/kubernetes-id: homelab-bootstrap-k3s
   links:
     - url: https://local.cmoreira.dev/grafana
@@ -20,5 +25,6 @@ spec:
   type: website
   lifecycle: production
   owner: platform-team
+  system: homelab
   dependsOn:
     - component:homelab-bootstrap-k3s
