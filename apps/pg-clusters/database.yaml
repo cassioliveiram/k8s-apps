@@ -33,5 +33,3 @@ spec:
   
   monitoring:
     enablePodMonitor: true
-    labels:
-        release: prometheus
