@@ -1,7 +1,3 @@
 cloudnative-pg: 
   nodeSelector:
     kubernetes.io/arch: amd64
-  monitoring:
-      grafanaDashboard:
-        create: false
-        namespace: "grafana-server"
