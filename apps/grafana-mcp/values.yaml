@@ -27,3 +27,6 @@ externalSecret:
     - secretKey: GRAFANA_API_KEY
       remoteRef:
         key: /homelab/grafana/mcp-api-token
+        conversionStrategy: Default
+        decodingStrategy: None
+        metadataPolicy: None
