@@ -1,3 +1,0 @@
-alloy-operator:
-  nodeSelector:
-    kubernetes.io/arch: amd64

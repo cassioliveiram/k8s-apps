@@ -1,4 +1,0 @@
-opentelemetry-operator:
-  manager:
-    collectorImage:
-      repository: otel/opentelemetry-collector-contrib
