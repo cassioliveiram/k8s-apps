@@ -1,7 +1,0 @@
-cert-manager:
-  installCRDs: true
-  prometheus:
-    servicemonitor:
-      enabled: true
-      labels:
-        release: prometheus
